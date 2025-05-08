@@ -14,7 +14,7 @@ router.put('/:id',validarCiudad,ciudadesController.actualizarCiudad)
 
 router.patch('/:id',ciudadesController.actualizarParcialCiudad);
 
-// router.delete('/:id',ProductoController.eliminarProducto);
+router.delete('/:id',ciudadesController.eliminarCiudad);
 
 
 export default router;

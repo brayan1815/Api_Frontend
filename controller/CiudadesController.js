@@ -42,6 +42,17 @@ class ciudadesController{
             res.status(500).json({error:error}.message);
         }
     }
+
+    static eliminarCiudad=async(req,res)=>{
+        const {id}=req.params;
+        try {
+            const OBJCiudad=new Ciudades();
+            const ciu=await OBJCiudad.deleteCiudad(id);
+            res.json(ciu);
+        } catch (error) {
+            res.status(500).json({error:error.message});
+        }
+    }
 }
 
 export default ciudadesController;

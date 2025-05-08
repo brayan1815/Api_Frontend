@@ -51,6 +51,25 @@ class Ciudades{
         }
     }
 
+    async validarCiudadesAsociadas(ciudad_id){
+        const [rows]=await connection.query("SELECT * FROM usuarios WHERE ciudad=?",[ciudad_id]);
+        return rows.length>0;
+    }
+
+    async deleteCiudad(id){
+        try {
+            if(await this.validarCiudadesAsociadas(id)){
+                throw new Error("No se puede eliminar la ciudad porque tiene usuarios asociados");
+            }
+            const [result]=await connection.query("DELETE FROM ciudades WHERE id_ciudad=?",[id]);
+            return result;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+
+
     
 }
 
