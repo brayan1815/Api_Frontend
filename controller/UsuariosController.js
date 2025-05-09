@@ -22,17 +22,40 @@ class UsuariosController{
     }
 
     static actualizarUsuario=async(req,res)=>{
-        const {documento}=req.params; 
-        const {nombre_usuario,apellido_usuario,telefono,contrasenia,genero,ciudad}=req.body;
+        const {id}=req.params; 
+        const {documento,nombre_usuario,apellido_usuario,telefono,contrasenia,genero,ciudad}=req.body;
         try {
             const OBJUsuario=new Usuarios();
-            const user=await OBJUsuario.update(nombre_usuario,apellido_usuario,telefono,contrasenia,genero,ciudad,documento);
+            const user=await OBJUsuario.update(documento,nombre_usuario,apellido_usuario,telefono,contrasenia,genero,ciudad,id);
             res.json(user);
         } catch (error) {
             res.status(500).json({error:error}.message);
         }
     }
 
+    static actualizarParcialUsuario=async(req,res)=>{
+        const campos=req.body;
+        const {id}=req.params;
+        try {
+            const OBJUsuario = new Usuarios();
+            const usu=await OBJUsuario.updateParcial(id,campos);
+            res.json(usu);
+        } catch (error) {
+            res.status(500).json({error:error}.message);
+        }
+    }
+
+    static eliminarUsuario=async(req,res)=>{
+        const {id}=req.params;
+        try {
+            const OBJUsuario=new Usuarios();
+            const usu=await OBJUsuario.deleteUsuario(id);
+            res.json(usu);
+        } catch (error) {
+            res.status(500).json({error:error.message});
+        }
+    }
+    
 }
 
 export default UsuariosController;

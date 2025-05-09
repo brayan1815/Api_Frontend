@@ -50,11 +50,16 @@ class Lenguajes{
         }
     }
 
+    async validarLenguaje (id_lenguaje) {
+        const [rows] = await connection.query("SELECT * FROM lenguaje_usuario WHERE id_lenguaje  = ?",[id_lenguaje]);
+        return rows.length>0;
+       }
+
     async deleteLenguaje(id){
         try {
-            // if(await this.validarGenerosAsociados(id)){
-            //     throw new Error("No se puede eliminar el genero porque tiene usuarios asociados");
-            // }
+            if(await this.validarLenguaje (id)){
+                throw new Error("no se puede eliminar el lenguaje porque tiene usuarios asociados");
+            }
             const [result]=await connection.query("DELETE FROM lenguajes WHERE id_lenguaje=?",[id]);
             return result;
         } catch (error) {

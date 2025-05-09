@@ -8,11 +8,11 @@ router.get('/', UsuariosController.getAllUsuarios);
 
 router.post('/',validarUsuario, UsuariosController.createUsuario);
 
-router.put('/:documento',validarUsuario,UsuariosController.actualizarUsuario)
+router.put('/:id',validarUsuario,UsuariosController.actualizarUsuario)
 
-// router.patch('/:id',ciudadesController.actualizarParcialCiudad);
+router.patch('/:id',UsuariosController.actualizarParcialUsuario);
 
-// router.delete('/:id',ProductoController.eliminarProducto);
+router.delete('/:id',UsuariosController.eliminarUsuario);
 
 
 export default router;
